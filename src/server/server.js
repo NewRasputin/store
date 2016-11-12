@@ -2,6 +2,7 @@ import express from 'express'
 import helmet from 'helmet'
 import bodyParser from 'body-parser'
 import logger from './logger.js'
+import auth from './routes/auth.js'
 import api from './routes/api.js'
 import _db from './db/config.js'
 
@@ -16,6 +17,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(logger.middleware)
 
+app.use('/auth', auth)
 app.use('/api', api)
 
 app.get('/', (req, res) => {
