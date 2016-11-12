@@ -30,6 +30,7 @@
         ]
     },
     "globals": {
-      "process": true
+      "process": true,
+      "db": true
     }
 }
