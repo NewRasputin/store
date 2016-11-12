@@ -12,12 +12,14 @@ auth.post('/login', (req, res) => {
 	User.findOne({usrname: username}, (err, user) => {
 		if (err) {
 			logger.error(err)
+			res.sendStatus(500)
 		} else if (user) {
 			logger.info('User found!')
 			logger.info('Checking password...')
 			bcrypt.compare(password, user.psswrd, (err, correct) => {
 				if (err) {
 					logger.error(err)
+					res.sendStatus(500)
 				} else {
 					if (correct) {
 						logger.info('Password correct!')
@@ -42,12 +44,14 @@ auth.post('/signup', (req, res) => {
 		email: req.body.email,
 		psswrd: req.body.psswrd,
 	})
+	logger.inf('Saving user...')
 	user.save(err => {
 		if (err) {
 			logger.error(err)
+			res.sendStatus(500)
 		} else {
-			logger.info('Saved!')
-			res.sendStatus(200)
+			logger.info('User saved!')
+			res.status(200).send({message: 'User saved! Please log in with new username and password'})
 		}
 	})
 })
