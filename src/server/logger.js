@@ -1,9 +1,8 @@
 import debug from 'debug'
 
-const logger = {
-	info: debug('app:info'),
-	warn: debug('app:warn'),
-	error: debug('app:error')
-}
+const logger = {}
+logger.info = debug('app:info')
+logger.warn = debug('app:warn')
+logger.error = debug('app:error')
 
 export default logger
