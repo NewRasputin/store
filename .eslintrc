@@ -32,6 +32,7 @@
         ]
     },
     "globals": {
-      "process": true
+      "process": true,
+      "global": true
     }
 }
