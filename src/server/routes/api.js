@@ -5,8 +5,14 @@ import Item from '../models/item.js'
 const api = express.Router()
 
 api.get('/items', (req, res) => {
+	logger.info('Finding items...')
 	Item.find({}, (err, items) => {
-		res.send(items)
+		if (err) {
+			logger.error(err)
+		} else {
+			logger.info('Items found!')
+			res.send(items)
+		}
 	})
 })
 
