@@ -6,7 +6,7 @@ var babel = require('gulp-babel')
 gulp.task('start', () => {
   nodemon({
     script: 'dist/server.js',
-    env: {'NODE_ENV': 'development', 'DEBUG': 'app:*'}
+    env: {'NODE_ENV': 'development', 'DEBUG': 'app:*,http:*'}
   })
 })
 
