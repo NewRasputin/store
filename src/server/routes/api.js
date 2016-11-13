@@ -1,6 +1,7 @@
 import express from 'express'
 import logger from '../logger.js'
 import Item from '../models/item.js'
+import authenticate from '../middleware/authenticate.js'
 
 const api = express.Router()
 
@@ -17,7 +18,7 @@ api.get('/items', (req, res) => {
 	})
 })
 
-api.post('/items', (req, res) => {
+api.post('/items', authenticate, (req, res) => {
 	logger.info('Saving item...')
 	let item = new Item({
 		name: req.body.name,
