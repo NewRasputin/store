@@ -24,6 +24,8 @@ auth.post('/login', (req, res) => {
 					if (correct) {
 						logger.info('Password correct!')
 						username = user.usrname
+						req.session.usrname = username
+						logger.info('User \'' + username + '\' logged in')
 						res.status(200).send({message: 'Welcome, ' + username})
 					} else {
 						logger.error('Password incorrect')
