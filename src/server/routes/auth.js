@@ -24,6 +24,8 @@ auth.post('/login', (req, res) => {
 					if (correct) {
 						logger.info('Password correct!')
 						username = user.usrname
+						req.session.usrname = username
+						logger.info('User \'' + username + '\' logged in')
 						res.status(200).send({message: 'Welcome, ' + username})
 					} else {
 						logger.error('Password incorrect')
@@ -58,7 +60,7 @@ auth.post('/signup', (req, res) => {
 
 auth.get('/logout', (req, res) => {
 	logger.info('Logging out...')
-	if (req.session && req.session.username) {
+	if (req.session && req.session.usrname) {
 		let username = req.session.usrname
 		req.session.reset()
 		logger.info('User \'' + username + '\' logged out')
