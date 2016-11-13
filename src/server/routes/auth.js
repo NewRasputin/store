@@ -60,7 +60,7 @@ auth.post('/signup', (req, res) => {
 
 auth.get('/logout', (req, res) => {
 	logger.info('Logging out...')
-	if (req.session && req.session.username) {
+	if (req.session && req.session.usrname) {
 		let username = req.session.usrname
 		req.session.reset()
 		logger.info('User \'' + username + '\' logged out')
