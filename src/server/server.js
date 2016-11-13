@@ -21,12 +21,15 @@ app.use(sessions({
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended: false}))
 app.use(logger.middleware)
+app.use(express.static('public'))
+app.set('view engine', 'ejs')
+app.set('views', './dist/views')
 
 app.use('/auth', auth)
 app.use('/api', api)
 
 app.get('/', (req, res) => {
-	res.send('Hello world!')
+	res.render('index')
 })
 
 app.listen(port, () => {
