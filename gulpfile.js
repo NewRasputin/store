@@ -27,6 +27,8 @@ gulp.task('server', () => {
 
 gulp.task('client', () => {
 	gulp.src('src/client/entry.js')
+		.pipe(eslint())
+		.pipe(eslint.format())
 		.pipe(webpack({
 			devtool: 'source-maps',
 			output: {
