@@ -19,7 +19,6 @@ const authenticate = (req, res, next) => {
 		})
 	} else {
 		logger.error('User not logged in')
-		logger.debug(req.session.usrname)
 		res.status(400).send({message: 'You must be logged in to do that'})
 	}
 }
