@@ -11,13 +11,15 @@ gulp.task('start', () => {
 })
 
 gulp.task('server', () => {
-  gulp.src('src/server/**/*.*')
+  gulp.src('src/server/**/*.js')
     .pipe(eslint())
     .pipe(eslint.format())
     .pipe(babel({
       presets: ['es2015']
     }))
     .pipe(gulp.dest('dist'))
+	gulp.src('src/server/**/*.ejs')
+		.pipe(gulp.dest('dist'))
 })
 
 gulp.task('watch', () => {
