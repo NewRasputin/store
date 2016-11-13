@@ -56,4 +56,17 @@ auth.post('/signup', (req, res) => {
 	})
 })
 
+auth.get('/logout', (req, res) => {
+	logger.info('Logging out...')
+	if (req.session && req.session.username) {
+		let username = req.session.usrname
+		req.session.reset()
+		logger.info('User \'' + username + '\' logged out')
+		res.status(200).send('User \'' + username + '\' logged out')
+	} else {
+		logger.error('No session found')
+		res.status(400).send({message: 'No session found'})
+	}
+})
+
 export default auth
