@@ -16,5 +16,6 @@ export default {
 	@import url('https://fonts.googleapis.com/css?family=Open+Sans|Roboto+Slab');
 	html, body {
 		margin: 0;
+		font-family: 'Open Sans', sans-serif;
 	}
 </style>
