@@ -2,6 +2,8 @@ var gulp = require('gulp')
 var nodemon = require('gulp-nodemon')
 var eslint = require('gulp-eslint')
 var babel = require('gulp-babel')
+var webpack = require('gulp-webpack')
+var livereload = require('gulp-livereload')
 
 gulp.task('start', () => {
   nodemon({
@@ -20,10 +22,39 @@ gulp.task('server', () => {
     .pipe(gulp.dest('dist'))
 	gulp.src('src/server/**/*.ejs')
 		.pipe(gulp.dest('dist'))
+		.pipe(livereload())
+})
+
+gulp.task('client', () => {
+	gulp.src('src/client/entry.js')
+		.pipe(eslint())
+		.pipe(eslint.format())
+		.pipe(webpack({
+			devtool: 'source-maps',
+			output: {
+				filename: 'bundle.js'
+			},
+			module: {
+				loaders: [
+					{
+						test: /\.js$/,
+						loader: 'babel',
+						exclude: /node_modules/
+					}, {
+						test: /\.vue$/,
+						loader: 'vue'
+					}
+				]
+			}
+		}))
+		.pipe(gulp.dest('dist/public'))
+		.pipe(livereload())
 })
 
 gulp.task('watch', () => {
+	livereload.listen()
   gulp.watch('src/server/**/*.*', ['server'])
+	gulp.watch('src/client/**/*.*', ['client'])
 })
 
 gulp.task('dev', ['start', 'watch'])
