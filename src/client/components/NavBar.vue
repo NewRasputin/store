@@ -17,7 +17,7 @@ export default {
 <style lang="css" scoped>
 	.navbar {
 		background-color: #333;
-		padding: .5em 1em;
+		padding: .75em 1em;
 	}
 	.router-link-active {
 		text-shadow: 0 0 10px #C7C7C7;
