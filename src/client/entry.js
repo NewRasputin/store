@@ -13,11 +13,23 @@ Vue.use(Vuex)
 
 const store = new Vuex.Store({
 	state: {
-		items: []
+		items: [],
+		showLogin: false,
+		showSignup: false
 	},
 	mutations: {
 		setItems (state, items) {
 			state.items = items
+		},
+		toggleLogin (state) {
+			state.showLogin = ! state.showLogin
+		},
+		toggleSignup (state) {
+			state.showSignup = ! state.showSignup
+		},
+		toggleModal (state) {
+			state.showLogin = false
+			state.showSignup = false
 		}
 	}
 })
