@@ -6,17 +6,22 @@ import bcrypt from 'bcryptjs'
 const auth = express.Router()
 
 auth.get('/login', (req, res) => {
-	let username = req.session.usrname
-	logger.info('Finding user...')
-	User.findOne({usrname: username}, (err, user) => {
-		if (err) {
-			logger.error(err)
-			res.sendStatus(500)
-		} else if (user) {
-			logger.info('User \'' + username + '\' logged in')
-			res.status(200).send({username: username})
-		}
-	})
+	logger.info('Checking for session...')
+	if (req.session && req.session.usrname) {
+		let username = req.session.usrname
+		logger.info('Finding user...')
+		User.findOne({usrname: username}, (err, user) => {
+			if (err) {
+				logger.error(err)
+				res.sendStatus(500)
+			} else if (user) {
+				logger.info('User \'' + username + '\' logged in')
+				res.status(200).send({username: username})
+			}
+		})
+	} else {
+		logger.info('No session found')
+	}
 })
 
 auth.post('/login', (req, res) => {
