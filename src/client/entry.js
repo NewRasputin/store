@@ -15,7 +15,8 @@ const store = new Vuex.Store({
 	state: {
 		items: [],
 		showLogin: false,
-		showSignup: false
+		showSignup: false,
+		username: ''
 	},
 	mutations: {
 		setItems (state, items) {
@@ -30,6 +31,9 @@ const store = new Vuex.Store({
 		toggleModal (state) {
 			state.showLogin = false
 			state.showSignup = false
+		},
+		setUsername (state, name) {
+			state.username = name
 		}
 	}
 })
