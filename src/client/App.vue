@@ -6,6 +6,11 @@
 				<LoginForm />
 			</Modal>
 		</transition>
+		<transition name="fade">
+			<Modal v-if="showSignup">
+				<SignupForm />
+			</Modal>
+		</transition>
 		<div class="container">
 			<router-view></router-view>
 		</div>
@@ -16,9 +21,10 @@
 import NavBar from './components/NavBar.vue'
 import Modal from './components/Modal.vue'
 import LoginForm from './components/LoginForm.vue'
+import SignupForm from './components/SignupForm.vue'
 export default {
 	name: 'App',
-	components: {NavBar, Modal, LoginForm},
+	components: {NavBar, Modal, LoginForm, SignupForm},
 	created () {
 		this.$http.get('/auth/login')
 			.then((res) => {
@@ -30,6 +36,9 @@ export default {
 	computed: {
 		showLogin () {
 			return this.$store.state.showLogin
+		},
+		showSignup () {
+			return this.$store.state.showSignup
 		}
 	}
 }
