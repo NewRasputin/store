@@ -5,6 +5,20 @@ import bcrypt from 'bcryptjs'
 
 const auth = express.Router()
 
+auth.get('/login', (req, res) => {
+	let username = req.session.usrname
+	logger.info('Finding user...')
+	User.findOne({usrname: username}, (err, user) => {
+		if (err) {
+			logger.error(err)
+			res.sendStatus(500)
+		} else if (user) {
+			logger.info('User \'' + username + '\' logged in')
+			res.status(200).send({username: username})
+		}
+	})
+})
+
 auth.post('/login', (req, res) => {
 	let username = req.body.usrname
 	let password = req.body.psswrd
@@ -26,7 +40,7 @@ auth.post('/login', (req, res) => {
 						username = user.usrname
 						req.session.usrname = username
 						logger.info('User \'' + username + '\' logged in')
-						res.status(200).send({message: 'Welcome, ' + username})
+						res.status(200).send({username: username})
 					} else {
 						logger.error('Password incorrect')
 						res.status(400).send({message: 'Password incorrect'})
