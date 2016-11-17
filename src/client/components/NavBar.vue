@@ -2,15 +2,39 @@
   <div class="navbar">
 		<router-link to="/" exact>Home</router-link>
 		<router-link to="/about">About</router-link>
-		<div class="right">
-			<router-link to="/login" exact>Login</router-link>
-			<router-link to="/signup">Signup</router-link>
+		<div class="right link-">
+			<a v-if="!username" @click="toggleLogin">Login</a>
+			<a v-if="!username" @click="toggleSignup">Signup</a>
+			<a v-if="username">{{username}}</a>
+			<a v-if="username" @click="logout">Logout</a>
 		</div>
   </div>
 </template>
 
 <script>
 export default {
+	name: 'Navbar',
+	computed: {
+		username () {
+			return this.$store.state.username
+		}
+	},
+	methods: {
+		toggleLogin () {
+			this.$store.commit('toggleLogin')
+		},
+		toggleSignup () {
+			this.$store.commit('toggleLogin')
+		},
+		logout () {
+			this.$http.get('/auth/logout')
+				.then((res) => {
+					this.$store.state.username = ''
+				}, (res) => {
+
+				})
+		}
+	}
 }
 </script>
 
@@ -31,6 +55,7 @@ export default {
 		font-family: 'Roboto Slab', serif;
 		color: #F7F7F7;
 		transition: text-shadow .1s;
-		padding: 0 .2em
+		padding: 0 .2em;
+		cursor: pointer;
 	}
 </style>
