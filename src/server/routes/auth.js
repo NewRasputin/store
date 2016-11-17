@@ -65,7 +65,7 @@ auth.post('/signup', (req, res) => {
 		email: req.body.email,
 		psswrd: req.body.psswrd,
 	})
-	logger.inf('Saving user...')
+	logger.info('Saving user...')
 	user.save(err => {
 		if (err) {
 			logger.error(err)
