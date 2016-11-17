@@ -24,7 +24,7 @@ export default {
 			this.$store.commit('toggleLogin')
 		},
 		toggleSignup () {
-			this.$store.commit('toggleLogin')
+			this.$store.commit('toggleSignup')
 		},
 		logout () {
 			this.$http.get('/auth/logout')
